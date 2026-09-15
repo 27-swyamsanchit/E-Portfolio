@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swyam Sanchit — Financial Modeling &amp; Equity Research</title>
+<meta name="description" content="Portfolio of equity research, DCF valuation and M&amp;A modeling work by Swyam Sanchit, PGDM (Finance), FIIB.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#131c2b;
+    --ink-soft:#3a4356;
+    --paper:#f7f4ec;
+    --paper-dim:#efeade;
+    --rule:#d9d2bd;
+    --brass:#a8722f;
+    --brass-deep:#7f551f;
+    --ledger-green:#2f6b4c;
+    --ledger-red:#a1382f;
+    --navy-panel:#101a2c;
+    --navy-panel-2:#182642;
+    --paper-on-navy:#e9e4d5;
+    --serif: "Source Serif 4", Georgia, serif;
+    --sans: "IBM Plex Sans", Arial, sans-serif;
+    --mono: "IBM Plex Mono", "Courier New", monospace;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--sans);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  img{max-width:100%;display:block;}
+
+  ::selection{background:var(--brass);color:var(--paper);}
+
+  :focus-visible{
+    outline:2px solid var(--brass-deep);
+    outline-offset:3px;
+  }
+
+  .wrap{
+    max-width:1080px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- Masthead ---------- */
+  header.masthead{
+    border-bottom:1px solid var(--rule);
+    background:var(--paper);
+    position:sticky;
+    top:0;
+    z-index:50;
+  }
+  .masthead-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 28px;
+    max-width:1080px;
+    margin:0 auto;
+  }
+  .brand{
+    font-family:var(--serif);
+    font-weight:600;
+    font-size:1.15rem;
+    letter-spacing:0.01em;
+    text-decoration:none;
+  }
+  .brand span{color:var(--brass-deep);}
+  nav.primary-nav ul{
+    list-style:none;
+    display:flex;
+    gap:28px;
+    margin:0;
+    padding:0;
+  }
+  nav.primary-nav a{
+    text-decoration:none;
+    font-size:0.88rem;
+    color:var(--ink-soft);
+    border-bottom:1px solid transparent;
+    padding-bottom:2px;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  nav.primary-nav a:hover{
+    color:var(--ink);
+    border-color:var(--brass);
+  }
+  .nav-toggle{display:none;}
+
+  /* ---------- Ticker ---------- */
+  .ticker{
+    background:var(--navy-panel);
+    color:var(--paper-on-navy);
+    overflow:hidden;
+    border-bottom:1px solid var(--brass-deep);
+  }
+  .ticker-track{
+    display:flex;
+    width:max-content;
+    animation:scroll-ticker 42s linear infinite;
+    font-family:var(--mono);
+    font-size:0.82rem;
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ticker-track{animation:none;}
+    .ticker{overflow-x:auto;}
+  }
+  .ticker-item{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    padding:9px 26px;
+    white-space:nowrap;
+    border-right:1px solid rgba(233,228,213,0.15);
+  }
+  .ticker-item .sym{font-weight:600; letter-spacing:0.03em;}
+  .ticker-item .up{color:#7fc79a;}
+  .ticker-item .down{color:#e59a91;}
+  @keyframes scroll-ticker{
+    from{transform:translateX(0);}
+    to{transform:translateX(-50%);}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 64px;
+    border-bottom:1px solid var(--rule);
+  }
+  .hero-kicker{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--brass-deep);
+    letter-spacing:0.08em;
+    margin:0 0 18px;
+  }
+  .hero h1{
+    font-family:var(--serif);
+    font-size:clamp(2.6rem, 5.5vw, 4.4rem);
+    line-height:1.03;
+    font-weight:600;
+    margin:0 0 22px;
+    max-width:15ch;
+  }
+  .hero .lede{
+    font-size:1.12rem;
+    color:var(--ink-soft);
+    max-width:52ch;
+    margin:0 0 34px;
+  }
+  .hero .lede strong{color:var(--ink); font-weight:600;}
+
+  .hero-actions{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:56px;
+  }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:12px 22px;
+    font-family:var(--sans);
+    font-size:0.92rem;
+    font-weight:600;
+    text-decoration:none;
+    border-radius:2px;
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .btn-primary{
+    background:var(--ink);
+    color:var(--paper);
+  }
+  .btn-primary:hover{background:var(--navy-panel-2);}
+  .btn-secondary{
+    background:transparent;
+    color:var(--ink);
+    border:1px solid var(--ink);
+  }
+  .btn-secondary:hover{background:var(--ink); color:var(--paper);}
+
+  .stat-row{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    border-top:1px solid var(--rule);
+  }
+  .stat{
+    padding:22px 22px 0 0;
+    border-right:1px solid var(--rule);
+  }
+  .stat:last-child{border-right:none;}
+  .stat .num{
+    font-family:var(--serif);
+    font-size:2.1rem;
+    font-weight:600;
+    color:var(--ink);
+    display:block;
+  }
+  .stat .label{
+    font-size:0.82rem;
+    color:var(--ink-soft);
+    margin-top:4px;
+  }
+
+  /* ---------- Section shell ---------- */
+  section{
+    padding:76px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  section:last-of-type{border-bottom:none;}
+  .section-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:24px;
+    margin-bottom:40px;
+    flex-wrap:wrap;
+  }
+  .section-num{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--brass-deep);
+    letter-spacing:0.06em;
+    display:block;
+    margin-bottom:10px;
+  }
+  .section-head h2{
+    font-family:var(--serif);
+    font-size:2rem;
+    font-weight:600;
+    margin:0;
+    max-width:20ch;
+  }
+  .section-intro{
+    color:var(--ink-soft);
+    max-width:38ch;
+    font-size:0.96rem;
+    margin:0;
+  }
+
+  /* ---------- Research grid ---------- */
+  .research-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:1px;
+    background:var(--rule);
+    border:1px solid var(--rule);
+  }
+  .report-card{
+    background:var(--paper);
+    padding:26px 26px 24px;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  .report-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:12px;
+  }
+  .report-ticker{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--ink-soft);
+    letter-spacing:0.03em;
+  }
+  .rating{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    font-weight:600;
+    letter-spacing:0.04em;
+    padding:3px 9px;
+    border-radius:2px;
+    white-space:nowrap;
+  }
+  .rating.buy{background:rgba(47,107,76,0.13); color:var(--ledger-green);}
+  .rating.hold{background:rgba(168,114,47,0.15); color:var(--brass-deep);}
+  .rating.neutral{background:rgba(161,56,47,0.12); color:var(--ledger-red);}
+
+  .report-card h3{
+    font-family:var(--serif);
+    font-size:1.35rem;
+    font-weight:600;
+    margin:0;
+  }
+  .report-card p{
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    margin:0;
+  }
+  .report-figures{
+    display:flex;
+    gap:22px;
+    margin-top:auto;
+    padding-top:14px;
+    border-top:1px solid var(--rule);
+    font-family:var(--mono);
+  }
+  .report-figures div{font-size:0.78rem; color:var(--ink-soft);}
+  .report-figures strong{
+    display:block;
+    font-size:0.98rem;
+    color:var(--ink);
+    font-weight:600;
+  }
+  .report-figures .up strong{color:var(--ledger-green);}
+  .report-figures .down strong{color:var(--ledger-red);}
+
+  /* ---------- Deal spotlight ---------- */
+  .deal{
+    background:var(--navy-panel);
+    color:var(--paper-on-navy);
+    padding:56px;
+    border-radius:2px;
+    display:grid;
+    grid-template-columns:1.1fr 0.9fr;
+    gap:48px;
+  }
+  .deal h3{
+    font-family:var(--serif);
+    font-size:1.9rem;
+    font-weight:600;
+    margin:0 0 6px;
+  }
+  .deal .deal-sub{
+    font-family:var(--mono);
+    font-size:0.8rem;
+    color:#c8bfa0;
+    margin:0 0 22px;
+  }
+  .deal p{
+    color:#cfc9b7;
+    font-size:0.96rem;
+    margin:0 0 16px;
+  }
+  .deal-metrics{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px 26px;
+    align-content:start;
+    border-top:1px solid rgba(233,228,213,0.18);
+    padding-top:22px;
+  }
+  .deal-metrics div{font-family:var(--mono);}
+  .deal-metrics .m-label{font-size:0.74rem; color:#a79c7c; letter-spacing:0.03em;}
+  .deal-metrics .m-value{font-size:1.15rem; color:#f2eedd; font-weight:600; margin-top:3px;}
+
+  /* ---------- CIP / experience ---------- */
+  .timeline{
+    border-top:1px solid var(--rule);
+  }
+  .tl-row{
+    display:grid;
+    grid-template-columns:150px 1fr;
+    gap:28px;
+    padding:28px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .tl-row:last-child{border-bottom:none;}
+  .tl-when{
+    font-family:var(--mono);
+    font-size:0.82rem;
+    color:var(--brass-deep);
+    padding-top:4px;
+  }
+  .tl-body h3{
+    font-family:var(--serif);
+    font-size:1.2rem;
+    font-weight:600;
+    margin:0 0 6px;
+  }
+  .tl-body .tl-role{
+    font-size:0.86rem;
+    color:var(--ink-soft);
+    margin:0 0 10px;
+  }
+  .tl-body p{
+    margin:0;
+    font-size:0.95rem;
+    color:var(--ink-soft);
+    max-width:62ch;
+  }
+
+  /* ---------- Skills ---------- */
+  .skills-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:36px;
+  }
+  .skill-col h3{
+    font-family:var(--serif);
+    font-size:1.1rem;
+    font-weight:600;
+    margin:0 0 14px;
+    padding-bottom:10px;
+    border-bottom:1px solid var(--rule);
+  }
+  .skill-col ul{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-direction:column;
+    gap:9px;
+  }
+  .skill-col li{
+    font-size:0.92rem;
+    color:var(--ink-soft);
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+  }
+  .skill-col li::before{
+    content:"";
+    width:5px;
+    height:5px;
+    background:var(--brass);
+    flex:none;
+    transform:translateY(-2px);
+  }
+
+  /* ---------- Method note ---------- */
+  .method{
+    background:var(--paper-dim);
+    padding:34px 36px;
+    border-left:3px solid var(--brass);
+    font-size:0.92rem;
+    color:var(--ink-soft);
+  }
+  .method strong{color:var(--ink);}
+
+  /* ---------- Footer / contact ---------- */
+  footer.contact{
+    padding:76px 0 60px;
+  }
+  .contact-inner{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    flex-wrap:wrap;
+    gap:32px;
+  }
+  .contact h2{
+    font-family:var(--serif);
+    font-size:2.2rem;
+    font-weight:600;
+    margin:0 0 14px;
+    max-width:14ch;
+  }
+  .contact p{
+    color:var(--ink-soft);
+    max-width:44ch;
+    margin:0;
+  }
+  .contact-links{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    font-family:var(--mono);
+    font-size:0.92rem;
+  }
+  .contact-links a{
+    text-decoration:none;
+    border-bottom:1px solid var(--rule);
+    padding-bottom:2px;
+    transition:border-color .15s ease, color .15s ease;
+  }
+  .contact-links a:hover{border-color:var(--brass-deep); color:var(--brass-deep);}
+  .foot-note{
+    margin-top:64px;
+    padding-top:22px;
+    border-top:1px solid var(--rule);
+    font-size:0.78rem;
+    color:#8b8570;
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width:860px){
+    .stat-row{grid-template-columns:repeat(2,1fr);}
+    .stat:nth-child(2){border-right:none;}
+    .research-grid{grid-template-columns:1fr;}
+    .deal{grid-template-columns:1fr; padding:34px 24px;}
+    .skills-grid{grid-template-columns:1fr; gap:26px;}
+    nav.primary-nav{display:none;}
+    .tl-row{grid-template-columns:1fr; gap:6px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="masthead">
+  <div class="masthead-inner">
+    <a href="#top" class="brand">Swyam Sanchit <span>· Finance</span></a>
+    <nav class="primary-nav" aria-label="Primary">
+      <ul>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#deal">M&amp;A model</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<div class="ticker" role="presentation" aria-hidden="true">
+  <div class="ticker-track" id="tickerTrack">
+    <!-- populated twice by JS for seamless loop -->
+  </div>
+</div>
+
+<main id="top">
+  <section class="hero wrap" style="border-bottom:none; padding-bottom:0;">
+    <p class="hero-kicker">PGDM (FINANCE) · FIIB, NEW DELHI · CLASS OF 2027</p>
+    <h1>Financial models, read like reports — not spreadsheets.</h1>
+    <p class="lede">I'm Aarav — writing as Swyam Sanchit on my models and reports. I build <strong>three-statement models</strong>, <strong>DCF valuations</strong> and <strong>M&amp;A analyses</strong> for Indian listed companies, then turn each one into a full equity research report: WACC and CAPM build-ups, scenario and sensitivity tables, comparable-company benchmarking, and a football-field valuation summary.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#research">View the research</a>
+      <a class="btn btn-secondary" href="https://linkedin.com/in/swyamsanchit987" target="_blank" rel="noopener">Connect on LinkedIn</a>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="stat-row">
+      <div class="stat"><span class="num">7</span><span class="label">Equity research reports, FY22&ndash;FY26 models</span></div>
+      <div class="stat"><span class="num">1</span><span class="label">Full M&amp;A model — Ambuja Cements / India Cements</span></div>
+      <div class="stat"><span class="num">11</span><span class="label">Companies in a pharma peer-comps dataset</span></div>
+      <div class="stat"><span class="num">Top 6%</span><span class="label">Global candidate ranking, FIIB</span></div>
+    </div>
+  </div>
+
+  <section id="research" class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">01 — Equity Research</span>
+        <h2>Company valuations, built end to end</h2>
+      </div>
+      <p class="section-intro">Each model runs historicals through a five-year forecast, a CAPM-derived WACC, an FCFF-based DCF, and a comps cross-check — presented as a standalone research report.</p>
+    </div>
+
+    <div class="research-grid">
+
+      <article class="report-card">
+        <div class="report-top">
+          <span class="report-ticker">NSE: ALKEM</span>
+          <span class="rating buy">BUY</span>
+        </div>
+        <h3>Alkem Laboratories</h3>
+        <p>Domestic pharma leader in anti-infectives and pain management. Bull/base/bear DCF scenarios, five-step DuPont decomposition, 15-page report with embedded charts.</p>
+        <div class="report-figures">
+          <div>CMP<strong>₹5,616</strong></div>
+          <div>Target<strong>₹8,152</strong></div>
+          <div class="up">Upside<strong>+45.2%</strong></div>
+        </div>
+      </article>
+
+      <article class="report-card">
+        <div class="report-top">
+          <span class="report-ticker">NSE: HINDALCO</span>
+          <span class="rating buy">BUY</span>
+        </div>
+        <h3>Hindalco Industries</h3>
+        <p>Aluminium and copper flagship of the Aditya Birla Group. Full consolidated cash flow build, facility-level debt repayment schedule, and an 11-peer beta re-levering exercise.</p>
+        <div class="report-figures">
+          <div>CMP<strong>₹974</strong></div>
+          <div>Target<strong>₹1,269</strong></div>
+          <div class="up">Upside<strong>+30.2%</strong></div>
+        </div>
+      </article>
+
+      <article class="report-card">
+        <div class="report-top">
+          <span class="report-ticker">NSE: ITC</span>
+          <span class="rating hold">HOLD</span>
+        </div>
+        <h3>ITC Limited</h3>
+        <p>Cigarettes-to-FMCG conglomerate. Added a Sum-of-the-Parts valuation sheet alongside the core DCF, using Screener.in as a live source for peer pricing.</p>
+        <div class="report-figures">
+          <div>CMP<strong>₹289</strong></div>
+          <div>DCF<strong>₹344</strong></div>
+          <div class="up">Upside<strong>+20.7%</strong></div>
+        </div>
+      </article>
+
+      <article class="report-card">
+        <div class="report-top">
+          <span class="report-ticker">NSE: CASTROLIND</span>
+          <span class="rating neutral">NEUTRAL</span>
+        </div>
+        <h3>Castrol India</h3>
+        <p>Lubricants market leader, modeled through the BP&nbsp;→&nbsp;Stonepeak ownership transition and the resulting open offer that anchors near-term price action.</p>
+        <div class="report-figures">
+          <div>CMP<strong>₹194</strong></div>
+          <div>DCF<strong>₹162</strong></div>
+          <div class="down">Downside<strong>&minus;16.5%</strong></div>
+        </div>
+      </article>
+
+      <article class="report-card">
+        <div class="report-top">
+          <span class="report-ticker">NSE: AMBUJACEM</span>
+          <span class="rating hold">HOLD</span>
+        </div>
+        <h3>Ambuja Cements</h3>
+        <p>Adani Group's cement platform. Bull-case forecast flagged and stress-tested against a more conservative base case; football field spans DCF, comps, and Street targets.</p>
+        <div class="report-figures">
+          <div>CMP<strong>₹418</strong></div>
+          <div>Target<strong>₹397</strong></div>
+          <div class="down">Downside<strong>&minus;5.1%</strong></div>
+        </div>
+      </article>
+
+      <article class="report-card">
+        <div class="report-top">
+          <span class="report-ticker">NSE: RELIANCE</span>
+          <span class="rating buy">BUY</span>
+        </div>
+        <h3>Reliance Industries</h3>
+        <p>O2C, Jio, and Retail modeled as three growth engines. Blended target weights DCF, EV/EBITDA comps and analyst consensus; credit analysis tracks the path to net cash.</p>
+        <div class="report-figures">
+          <div>CMP<strong>₹1,258</strong></div>
+          <div>Target<strong>₹1,565</strong></div>
+          <div class="up">Upside<strong>+24.4%</strong></div>
+        </div>
+      </article>
+
+    </div>
+
+    <p style="margin-top:28px; font-size:0.86rem; color:var(--ink-soft);">Also modeled: <strong>United Spirits</strong> (comps-led valuation against Radico Khaitan, United Breweries and peers) and a standalone <strong>India Cements</strong> target build feeding the M&amp;A model below.</p>
+  </section>
+
+  <section id="deal" class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">02 — M&amp;A Modeling</span>
+        <h2>Ambuja Cements / India Cements</h2>
+      </div>
+      <p class="section-intro">A full acquisition model: standalone and pro-forma three-statement builds, Sources &amp; Uses, purchase price allocation, and accretion/dilution.</p>
+    </div>
+
+    <div class="deal">
+      <div>
+        <h3>Same-industry consolidation, South Indian cement capacity</h3>
+        <p class="deal-sub">HYPOTHETICAL DEAL · ACADEMIC MODEL · CLOSE ASSUMED 30-SEP-2026</p>
+        <p>Ambuja Cements acquires The India Cements Limited at a 25% takeover premium, split 50% cash / 50% stock, funded partly by ₹7,500&nbsp;Cr of new three-tranche acquisition debt. The model quantifies goodwill from purchase price allocation and walks the deal through to pro-forma EPS and cash-flow-per-share accretion/dilution across a five-year forecast.</p>
+        <p>The result: dilutive to reported EPS throughout the explicit period, but modestly accretive to cash flow per share every year — a distinction the model traces to the non-cash D&amp;A shield created by the PP&amp;E step-up, and flags candidly alongside an unreconciled balance-sheet variance still open in this version.</p>
+      </div>
+      <div class="deal-metrics">
+        <div><div class="m-label">Enterprise value</div><div class="m-value">₹15,406 Cr</div></div>
+        <div><div class="m-label">Takeover premium</div><div class="m-value">25.0%</div></div>
+        <div><div class="m-label">Goodwill created</div><div class="m-value">₹2,114 Cr</div></div>
+        <div><div class="m-label">New acquisition debt</div><div class="m-value">₹7,500 Cr</div></div>
+        <div><div class="m-label">EPS impact, Year 1</div><div class="m-value">&minus;172.2%</div></div>
+        <div><div class="m-label">CFPS impact, Year 1</div><div class="m-value">+9.6%</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience" class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">03 — Experience</span>
+        <h2>Where the numbers came from</h2>
+      </div>
+      <p class="section-intro">Internship and work experience alongside the modeling portfolio.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-row">
+        <div class="tl-when">APR&ndash;JUN 2026</div>
+        <div class="tl-body">
+          <h3>Corporate Internship Programme — Arizon Network</h3>
+          <p class="tl-role">Content Operations &amp; Digital Product function · Ghaziabad, UP</p>
+          <p>Diagnosed a fully manual editorial-triage bottleneck at a digital publishing platform, then designed and self-tested <strong>ArizonIQ</strong> — a rule-based, human-in-the-loop scoring prototype that reads a draft's headline, brief, category and tone, and returns an engagement score, routing recommendation and rationale for an editor to act on.</p>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">JAN 2026</div>
+        <div class="tl-body">
+          <h3>Social Impact Intern — GiftAbled</h3>
+          <p class="tl-role">Delhi / Hybrid</p>
+          <p>Supported documentation, data organization and coordination for disability-inclusion initiatives.</p>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">JAN 2024&ndash;MAR 2025</div>
+        <div class="tl-body">
+          <h3>Accounts Executive — Allied Carrying Corporation</h3>
+          <p class="tl-role">Logistics · Patna</p>
+          <p>Managed ledger entries, reconciliations and bookkeeping in Tally ERP for consignors and consignees, and supported day-to-day billing operations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills" class="wrap">
+    <div class="section-head">
+      <div>
+        <span class="section-num">04 — Skills &amp; Tools</span>
+        <h2>What the models are built with</h2>
+      </div>
+    </div>
+
+    <div class="skills-grid">
+      <div class="skill-col">
+        <h3>Modeling</h3>
+        <ul>
+          <li>Three-statement financial modeling</li>
+          <li>DCF &amp; FCFF valuation</li>
+          <li>WACC &amp; CAPM build-up</li>
+          <li>M&amp;A modeling — Sources &amp; Uses, PPA, accretion/dilution</li>
+          <li>Scenario &amp; sensitivity analysis</li>
+          <li>Credit-risk &amp; debt-service analysis</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Research</h3>
+        <ul>
+          <li>Equity research report writing</li>
+          <li>Comparable-company benchmarking</li>
+          <li>Financial statement &amp; ratio analysis</li>
+          <li>DuPont decomposition</li>
+          <li>Football-field valuation summaries</li>
+        </ul>
+      </div>
+      <div class="skill-col">
+        <h3>Tools</h3>
+        <ul>
+          <li>Advanced Excel — multi-sheet workbooks</li>
+          <li>Power BI</li>
+          <li>Python — Pandas, Matplotlib, Seaborn</li>
+          <li>Tally ERP</li>
+          <li>Screener.in, BSE/NSE/SEBI filings</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="method" style="margin-top:44px;">
+      <strong>A note on the models:</strong> these are academic and portfolio exercises, built independently for the purpose of learning financial modeling and valuation. They are not SEBI-registered research and don't constitute investment advice — every report says so on its own cover page too.
+    </div>
+  </section>
+
+  <section class="wrap" style="border-bottom:none;">
+    <div class="section-head">
+      <div>
+        <span class="section-num">05 — Education</span>
+        <h2>Fortune Institute of International Business</h2>
+      </div>
+    </div>
+    <div class="timeline" style="border-top:1px solid var(--rule);">
+      <div class="tl-row">
+        <div class="tl-when">2025&ndash;2027</div>
+        <div class="tl-body">
+          <h3>PGDM, Financial Management</h3>
+          <p class="tl-role">Top 6% Global Candidate</p>
+          <p>Coursework and independent projects centered on equity research, valuation, M&amp;A modeling and credit analysis.</p>
+        </div>
+      </div>
+      <div class="tl-row">
+        <div class="tl-when">Earlier</div>
+        <div class="tl-body">
+          <h3>BBM</h3>
+          <p class="tl-role">Patliputra University</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="contact wrap" id="contact">
+  <div class="contact-inner">
+    <div>
+      <h2>Let's talk numbers.</h2>
+      <p>Open to financial analyst, equity research and FP&amp;A roles — and happy to walk through any model in more depth.</p>
+    </div>
+    <div class="contact-links">
+      <a href="https://linkedin.com/in/swyamsanchit987" target="_blank" rel="noopener">linkedin.com/in/swyamsanchit987</a>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </div>
+  <div class="foot-note">
+    <span>Swyam Sanchit · PGDM (Finance), FIIB, New Delhi</span>
+    <span>All figures are model outputs from academic projects, not investment advice.</span>
+  </div>
+</footer>
+
+<script>
+  // Ticker: build once, duplicate for a seamless scroll loop.
+  const tickers = [
+    { sym: "ALKEM", note: "BUY · +45.2%", dir: "up" },
+    { sym: "HINDALCO", note: "BUY · +30.2%", dir: "up" },
+    { sym: "ITC", note: "HOLD · +20.7%", dir: "up" },
+    { sym: "CASTROLIND", note: "NEUTRAL · \u221216.5%", dir: "down" },
+    { sym: "AMBUJACEM", note: "HOLD · \u22125.1%", dir: "down" },
+    { sym: "RELIANCE", note: "BUY · +24.4%", dir: "up" },
+    { sym: "AMBUJA / INDIA CEMENTS", note: "M&A model · EV ₹15,406 Cr", dir: "up" }
+  ];
+  const track = document.getElementById('tickerTrack');
+  function renderTicker(){
+    const html = tickers.map(t =>
+      `<div class="ticker-item"><span class="sym">${t.sym}</span><span class="${t.dir}">${t.note}</span></div>`
+    ).join('');
+    track.innerHTML = html + html; // duplicate for seamless loop
+  }
+  renderTicker();
+</script>
+
+</body>
+</html>
